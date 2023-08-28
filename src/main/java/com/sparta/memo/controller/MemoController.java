@@ -21,7 +21,7 @@ public class MemoController {
         // RequestDto -> Entity
         Memo memo = new Memo(requestDto);
 
-        // Memo Max ID Check
+        // Memo Max ID Check (memoList에 데이터가 있는지 체크)
         Long maxId = memoList.size() > 0 ? Collections.max(memoList.keySet()) + 1 : 1;
         memo.setId(maxId);
 
@@ -36,7 +36,7 @@ public class MemoController {
 
     @GetMapping("/memos")
     public List<MemoResponseDto> getMemos() {
-        // Map To List
+        // Map To List (.stream을 활용해서 데이터를 순회하고 .map으로 생성자를 수행하여 dto로 만들고 list화)
         List<MemoResponseDto> responseList = memoList.values().stream()
                 .map(MemoResponseDto::new).toList();
 

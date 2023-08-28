@@ -14,6 +14,6 @@ public class Memo {
     private String contents;
 
     public Memo(MemoRequestDto requestDto) {
-    }
 
+    }
 }
