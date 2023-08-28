@@ -9,8 +9,8 @@ import java.util.List;
 @RequestMapping("/api")
 public class MemoController {
     private final MemoService memoService;
-    public MemoController(JdbcTemplate jdbcTemplate) {
-        this.memoService = new MemoService(jdbcTemplate);
+    public MemoController(MemoService memoService) {
+        this.memoService = memoService;
     }
     @PostMapping("/memos")
     public MemoResponseDto createMemo(@RequestBody MemoRequestDto requestDto) {
