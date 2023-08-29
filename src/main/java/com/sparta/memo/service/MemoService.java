@@ -3,14 +3,21 @@ import com.sparta.memo.dto.MemoRequestDto;
 import com.sparta.memo.dto.MemoResponseDto;
 import com.sparta.memo.entity.Memo;
 import com.sparta.memo.repository.MemoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class MemoService {
     private final MemoRepository memoRepository;
+    // Spring 4.3 버전 이후에 생성자 선언이 하나일 때는 자동 생략 가능
+
+//    public void setDi(MemoRepository memoRepository){
+//        this.memoRepository = memoRepository;
+//    }
     public MemoService(MemoRepository memoRepository) {
         this.memoRepository = memoRepository;
     }

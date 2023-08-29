@@ -2,18 +2,21 @@ package com.sparta.memo.repository;
 import com.sparta.memo.dto.MemoRequestDto;
 import com.sparta.memo.dto.MemoResponseDto;
 import com.sparta.memo.entity.Memo;
+import jakarta.persistence.EntityManager;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-@Component // Spring bean 객체로 등록하는 법
+@Repository // Spring bean 객체로 등록하는 법
 public class MemoRepository {
     private final JdbcTemplate jdbcTemplate;
     public MemoRepository(JdbcTemplate jdbcTemplate) {
@@ -71,5 +74,15 @@ public class MemoRepository {
                 return null;
             }
         }, id);
+    }
+
+    @Transactional
+    public Memo createMemo(EntityManager em) {
+        Memo memo = em.find(Memo.class, 1);
+        memo.setUsername("Robert");
+        memo.setContents("@Transactional 전파 테스트 중! 2");
+
+        System.out.println("createMemo 메서드 종료");
+        return memo;
     }
 }
